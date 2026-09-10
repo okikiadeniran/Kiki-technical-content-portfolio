@@ -1,4 +1,4 @@
-Retrieval-Augmented Generation (RAG): A Practical Guide for Developers
+#Retrieval-Augmented Generation (RAG): A Practical Guide for Developers
 
 Retrieval-Augmented Generation (RAG) is an architecture that gives a large language model (LLM) access to external information at query time.
 
@@ -10,7 +10,7 @@ User query → Retrieve relevant information → Add context to the prompt → G
 
 This makes RAG useful for applications that need to answer questions about private, frequently changing, or domain-specific information.
 
-Why RAG Exists
+##Why RAG Exists
 
 LLMs are trained on large datasets, but their internal knowledge has limitations.
 
@@ -28,14 +28,14 @@ RAG uses the second approach.
 
 Instead of changing the model, the application retrieves relevant information and gives it to the model when the user asks a question.
 
-How a RAG System Works
+##How a RAG System Works
 
 A typical RAG pipeline has two major stages:
 
 Indexing the knowledge base
 Retrieving information at query time
 
-1. Indexing
+###1. Indexing
 
 Before users can search a knowledge base, documents need to be prepared for retrieval.
 
@@ -43,7 +43,7 @@ A typical indexing pipeline looks like this:
 
 Documents → Chunking → Embeddings → Vector storage
 
-Document Ingestion
+###Document Ingestion
 
 The application first collects the documents it needs to make searchable.
 
@@ -56,7 +56,7 @@ Product documentation
 Database records
 Internal company documents
 
-Chunking
+###Chunking
 
 Large documents are usually divided into smaller sections called chunks.
 
@@ -70,7 +70,7 @@ If they are too small, important context can be separated across multiple chunks
 
 There is no universal chunk size that works for every application. The appropriate strategy depends on the structure of the source material and the retrieval task.
 
-Embeddings
+###Embeddings
 
 An embedding model converts text into a numerical representation called an embedding.
 
@@ -93,7 +93,7 @@ The first two passages are likely to be more semantically relevant to the query 
 
 The retrieval system uses vector similarity to identify those relevant passages.
 
-2. Retrieval at Query Time
+##2. Retrieval at Query Time
 
 When a user submits a question, the application converts the query into an embedding.
 
@@ -119,7 +119,7 @@ The retrieved chunks become part of the context supplied to the LLM.
 
 The model can then use that information when generating its response.
 
-RAG Is Not the Same as Training an LLM
+##RAG Is Not the Same as Training an LLM
 
 A common misunderstanding is that adding documents to a RAG system teaches the model those documents.
 
@@ -159,7 +159,7 @@ Fine-tuning can be useful when the goal is to change how a model behaves, follow
 
 The two approaches can also be used together.
 
-Where Vector Databases Fit
+##Where Vector Databases Fit
 
 A vector database stores embeddings and supports similarity searches over them.
 
@@ -179,7 +179,7 @@ For example, a company may need to retrieve documents that are relevant to a que
 
 A retrieval system therefore needs to consider both relevance and access control.
 
-Retrieval Quality Determines Answer Quality
+##Retrieval Quality Determines Answer Quality
 
 An LLM can only use the information that reaches its context.
 
@@ -206,7 +206,7 @@ More context can introduce irrelevant information and consume part of the model�
 
 A good RAG system therefore aims to retrieve relevant context, not simply more context.
 
-RAG and Context Windows
+##RAG and Context Windows
 
 An LLM has a finite context window.
 
@@ -222,7 +222,7 @@ The application can then provide the selected content to the model.
 
 This is one reason retrieval is important for applications working with large knowledge bases.
 
-A Simple RAG Example
+##A Simple RAG Example
 
 Consider a support assistant for a software company.
 
@@ -245,37 +245,37 @@ The LLM does not need to have memorized the company’s documentation.
 
 The retrieval layer supplies the relevant information when it is needed.
 
-Common RAG Failure Modes
+##Common RAG Failure Modes
 
 RAG does not automatically produce accurate answers.
 
 Several parts of the pipeline can fail.
 
-Poor Chunking
+###Poor Chunking
 
 If important information is split across poorly designed chunks, the retriever may return incomplete context.
 
-Weak Retrieval
+###Weak Retrieval
 
 The system may retrieve documents that are semantically similar but do not actually answer the user’s question.
 
-Too Much Context
+###Too Much Context
 
 Returning too many chunks can add noise and increase token usage.
 
-Missing Information
+###Missing Information
 
 If the knowledge base does not contain the answer, retrieval cannot magically create it.
 
 The system should be designed to recognize when sufficient evidence is unavailable rather than presenting an unsupported answer as fact.
 
-Outdated Sources
+###Outdated Sources
 
 A retrieval system can only be as current as the data it indexes.
 
 If the source documents are outdated, the generated answer may also be outdated.
 
-How to Evaluate a RAG System
+##How to Evaluate a RAG System
 
 A useful RAG evaluation should examine more than the final generated answer.
 
@@ -293,7 +293,7 @@ Latency and cost: How quickly does the system respond, and how many resources do
 
 Evaluating these components separately makes it easier to identify where a RAG pipeline is failing.
 
-When Should Developers Use RAG?
+##When Should Developers Use RAG?
 
 RAG is a strong option when an application needs an LLM to work with external knowledge.
 
@@ -312,7 +312,7 @@ RAG is less useful when retrieval does not solve the underlying problem.
 
 For example, if the main requirement is to change the model’s writing style or behavior, fine-tuning or other model-level techniques may be more appropriate.
 
-Key Takeaways
+##Key Takeaways
 
 RAG connects an LLM to an external knowledge source.
 
