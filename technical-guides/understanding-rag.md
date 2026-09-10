@@ -16,11 +16,11 @@ LLMs are trained on large datasets, but their internal knowledge has limitations
 
 A model may not know about:
 
-A company’s internal documentation
-A user’s private files
-A product released after the model’s training data
-Frequently changing information
-Specialized information that was not well represented in its training data
+- A company’s internal documentation
+- A user’s private files
+- A product released after the model’s training data
+- Frequently changing information
+- Specialized information that was not well represented in its training data
 
 One way to address these limitations is to fine-tune the model. Another is to provide relevant information directly in the model’s context.
 
@@ -32,8 +32,8 @@ Instead of changing the model, the application retrieves relevant information an
 
 A typical RAG pipeline has two major stages:
 
-Indexing the knowledge base
-Retrieving information at query time
+1. Indexing the knowledge base
+2. Retrieving information at query time
 
 ### 1. Indexing
 
@@ -49,12 +49,12 @@ The application first collects the documents it needs to make searchable.
 
 These might include:
 
-PDFs
-Markdown files
-Web pages
-Product documentation
-Database records
-Internal company documents
+- PDFs
+- Markdown files
+- Web pages
+- Product documentation
+- Database records
+- Internal company documents
 
 ### Chunking
 
@@ -81,12 +81,15 @@ This allows a retrieval system to compare the meaning of a user query with the m
 For example:
 
 Query:
+
 "How do I reset my password?"
 
 Possible matches:
 
 "Users can reset their password from the account settings page."
+
 "Password recovery is available through the login screen."
+
 "Two-factor authentication can be enabled from security settings."
 
 The first two passages are likely to be more semantically relevant to the query than the third.
@@ -101,6 +104,7 @@ The system then searches the indexed knowledge base for relevant content.
 
 A simplified flow looks like this:
 
+```
 User question
       ↓
 Generate query embedding
@@ -114,6 +118,8 @@ Build model context
 Send context + question to LLM
       ↓
 Generate answer
+
+```
 
 The retrieved chunks become part of the context supplied to the LLM.
 
@@ -133,6 +139,7 @@ This distinction matters.
 
 With RAG:
 
+```
 Knowledge base
       ↓
 Retriever
@@ -143,8 +150,10 @@ LLM
       ↓
 Answer
 
+```
 With fine-tuning:
 
+```
 Training examples
       ↓
 Fine-tuning process
@@ -153,6 +162,7 @@ Updated model parameters
       ↓
 LLM
 
+```
 RAG is generally more suitable when the application needs access to information that changes regularly or needs to remain outside the model itself.
 
 Fine-tuning can be useful when the goal is to change how a model behaves, follows instructions, or produces a particular type of output.
@@ -165,11 +175,11 @@ A vector database stores embeddings and supports similarity searches over them.
 
 The database may store information such as:
 
-The embedding vector
-The original text or a reference to it
-Document metadata
-Source information
-Access-control information
+- The embedding vector
+- The original text or a reference to it
+- Document metadata
+- Source information
+- Access-control information
 
 When a user submits a query, the application searches the vector database for relevant records.
 
@@ -191,14 +201,14 @@ Better retrieval → Better context → Better opportunity for a useful answer
 
 Several factors can affect retrieval quality:
 
-Chunking strategy
-Embedding model
-Query formulation
-Similarity method
-Metadata filtering
-Number of retrieved chunks
-Reranking
-Quality of the source documents
+- Chunking strategy
+- Embedding model
+- Query formulation
+- Similarity method
+- Metadata filtering
+- Number of retrieved chunks
+- Reranking
+- Quality of the source documents
 
 Increasing the number of retrieved chunks is not always the solution.
 
@@ -234,12 +244,12 @@ How do I rotate an API key?
 
 A basic RAG system could process the request like this:
 
-Convert the question into an embedding.
-Search the documentation index.
-Retrieve the sections related to API key rotation.
-Add the retrieved sections to the model’s context.
-Ask the LLM to answer using the supplied documentation.
-Return the response to the user.
+- Convert the question into an embedding.
+- Search the documentation index.
+- Retrieve the sections related to API key rotation.
+- Add the retrieved sections to the model’s context.
+- Ask the LLM to answer using the supplied documentation.
+- Return the response to the user.
 
 The LLM does not need to have memorized the company’s documentation.
 
@@ -299,14 +309,14 @@ RAG is a strong option when an application needs an LLM to work with external kn
 
 Typical use cases include:
 
-Internal knowledge assistants
-Customer support systems
-Product documentation assistants
-Enterprise search
-Research tools
-Document question-answering
-Technical support
-Applications that need frequently updated information
+- Internal knowledge assistants
+- Customer support systems
+- Product documentation assistants
+- Enterprise search
+- Research tools
+- Document question-answering
+- Technical support
+- Applications that need frequently updated information
 
 RAG is less useful when retrieval does not solve the underlying problem.
 
@@ -318,6 +328,7 @@ RAG connects an LLM to an external knowledge source.
 
 The core process is:
 
+```
 Documents
    ↓
 Chunking
@@ -336,6 +347,7 @@ LLM
    ↓
 Answer
 
+```
 The important point is that RAG is not simply “put documents into a vector database.”
 
 A production RAG system requires decisions about ingestion, chunking, embeddings, retrieval, filtering, context construction, evaluation, security, latency, and cost.
