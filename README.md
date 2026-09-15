@@ -1,4 +1,4 @@
-# AI Technical Writing Portfolio
+# My Technical Writing Portfolio
 
 A collection of technical content focused on AI, LLMs, retrieval-augmented generation (RAG), developer tools, APIs, and technical product education.
 
